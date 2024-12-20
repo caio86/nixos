@@ -2,7 +2,7 @@
   description = "Flake of C410l";
 
   outputs =
-    { self, ... }@inputs:
+    { self, nixpkgs, ... }@inputs:
 
     let
       # --- SYSTEM SETTINGS --- #
@@ -43,11 +43,6 @@
 
       pkgs = pkgs-unstable;
 
-      home-manager = inputs.home-manager;
-
-      # configure lib
-      lib = inputs.nixpkgs.lib;
-
       inherit (self) outputs;
 
       extraSettings = {
@@ -56,50 +51,29 @@
           outputs
           systemSettings
           userSettings
-          myLib
-          ;
-      };
-      myLib = import ./lib {
-        inherit
-          inputs
-          pkgs
-          lib
-          home-manager
-          extraSettings
           ;
       };
 
-      # Systems that can run tests:
-      supportedSystems = [ "x86_64-linux" ];
-
-      # Function to generate a set based on supported systems:
-      forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
-
-      # Attribute set of nixpkgs for each system:
-      nixpkgsFor = forAllSystems (system: import inputs.nixpkgs { inherit system; });
+      lib = nixpkgs.lib.extend (final: _: import ./lib final "C410l" extraSettings);
+      inherit (lib.${lib.ns}) mkHost mkHome;
     in
-
-    with myLib;
     {
-      # Nix formatter available through 'nix fmt' https://nix-community.github.io/nixpkgs-fmt
-      formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-
       templates = import ./templates;
 
       overlays = import ./overlays;
 
       nixosConfigurations = {
 
-        system = mkSystem (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix") { };
+        system = mkHost self "personal" "x86_64-linux";
 
-        lua = mkSystem ./profiles/lua/configuration.nix { };
+        lua = mkHost self "lua" "x86_64-linux";
 
       };
 
       homeConfigurations = {
 
-        user = mkHome (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix");
-        lua = mkHome ./profiles/lua/home.nix;
+        user = mkHome self "personal" "x86_64-linux";
+        lua = mkHome self "lua" "x86_64-linux";
 
       };
     };
