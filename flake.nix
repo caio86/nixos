@@ -9,7 +9,6 @@
       systemSettings = {
         system = "x86_64-linux";
         hostname = "VEGA";
-        profile = "personal";
         timezone = "America/Sao_Paulo";
         locale = "pt_BR.UTF-8";
       };
@@ -46,7 +45,7 @@
 
       nixosConfigurations = {
 
-        system = mkHost self "personal" "x86_64-linux";
+        vega = mkHost self "vega" "x86_64-linux";
 
         lua = mkHost self "lua" "x86_64-linux";
 
@@ -54,7 +53,7 @@
 
       homeConfigurations = {
 
-        user = mkHome self "personal" "x86_64-linux";
+        user = mkHome self "vega" "x86_64-linux";
         lua = mkHome self "lua" "x86_64-linux";
 
       };
