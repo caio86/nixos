@@ -8,7 +8,6 @@ in
     inherit (extraSettings) userSettings systemSettings;
     #=================== Buildables =====================#
 
-    # @param {Path} config - the path to a configuration.nix file
     mkHost =
       self: hostname: system:
       nixosSystem {
@@ -26,7 +25,6 @@ in
         ];
       };
 
-    # @param {Path} config - the path to a home.nix file
     mkHome =
       self: username: system:
       let

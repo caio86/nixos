@@ -2,7 +2,7 @@
   description = "Flake of C410l";
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    { self, ... }@inputs:
 
     let
       # --- SYSTEM SETTINGS --- #
@@ -26,32 +26,14 @@
       };
 
       # configure pkgs
-      pkgs-unstable = import inputs.nixpkgs {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-        };
-      };
+      nixpkgs-unstable = inputs.nixpkgs;
 
-      # Unused for now
-      pkgs-stable = import inputs.nixpkgs-stable {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-        };
-      };
+      nixpkgs-stable = inputs.nixpkgs-stable;
 
-      pkgs = pkgs-unstable;
-
-      inherit (self) outputs;
+      nixpkgs = nixpkgs-unstable;
 
       extraSettings = {
-        inherit
-          inputs
-          outputs
-          systemSettings
-          userSettings
-          ;
+        inherit systemSettings userSettings;
       };
 
       lib = nixpkgs.lib.extend (final: _: import ./lib final "C410l" extraSettings);
