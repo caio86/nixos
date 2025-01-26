@@ -25,7 +25,6 @@
     ../../user/wm/hyprland/hyprland.nix
     ../../user/lang/k8s.nix
     ../../user/lang/rust.nix
-    ../../user/lang/java.nix
     ../../user/lang/golang.nix
     ../../user/lang/python.nix
     ../../user/style/gtk.nix
