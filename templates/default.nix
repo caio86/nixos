@@ -1,26 +1,26 @@
 {
-  dev-shell = {
-    path = ./dev-shell;
+  devshell = {
+    path = ./devshells/devshell;
     description = "dev shell with nix flakes";
   };
 
-  python-dev-shell = {
-    path = ./python-dev-shell;
+  python-devshell = {
+    path = ./devshells/python-devshell;
     description = "python dev shell flake";
   };
 
-  go-dev-shell = {
-    path = ./go-dev-shell;
+  go-devshell = {
+    path = ./devshells/go-devshell;
     description = "go dev shell flake";
   };
 
-  js-dev-shell = {
-    path = ./js-dev-shell;
+  js-devshell = {
+    path = ./devshells/js-devshell;
     description = "js dev shell flake";
   };
 
-  pop-dev-shell = {
-    path = ./pop-dev-shell;
+  pop-devshell = {
+    path = ./devshells/pop-devshell;
     description = "dev shell with justfile for building and running c++ code";
   };
 
