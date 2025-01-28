@@ -1,6 +1,6 @@
 {
   devshell = {
-    path = ./devshells/devshell;
+    path = ./devshells/simple-devshell;
     description = "dev shell with nix flakes";
   };
 
@@ -22,6 +22,16 @@
   pop-devshell = {
     path = ./devshells/pop-devshell;
     description = "dev shell with justfile for building and running c++ code";
+  };
+
+  latex-devshell = {
+    path = ./devshells/latex-devshell;
+    description = "LaTeX devshell for writting PDFs";
+  };
+
+  latex-sbc-devshell = {
+    path = ./devshells/latex-sbc-devshell;
+    description = "LaTeX devshell for writting PDFs, with SBC template";
   };
 
   nixos = {
