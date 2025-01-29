@@ -1,6 +1,6 @@
 {
   inputs,
-  outputs,
+  self,
   pkgs,
   systemSettings,
   userSettings,
@@ -30,7 +30,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = builtins.attrValues outputs.overlays;
+  nixpkgs.overlays = builtins.attrValues self.overlays;
 
   # Boot loader
   boot.loader.grub.enable = true;
