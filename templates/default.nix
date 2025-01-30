@@ -4,9 +4,14 @@
     description = "dev shell with nix flakes";
   };
 
-  python-devshell = {
-    path = ./devshells/python-devshell;
+  py-devshell = {
+    path = ./devshells/py-devshell;
     description = "python dev shell flake";
+  };
+
+  pyvenv-devshell = {
+    path = ./devshells/pyvenv-devshell;
+    description = "python dev shell flake with venv";
   };
 
   go-devshell = {
