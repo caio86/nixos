@@ -15,7 +15,15 @@
     in
     {
       devShells = forAllSystems (pkgs: {
-        default = pkgs.mkShell { packages = with pkgs; [ (python3.withPackages (ps: with ps; [ ])) ]; };
+        default = pkgs.mkShell {
+          packages = with pkgs; [
+            pyright
+            ruff
+            isort
+            black
+            (python3.withPackages (ps: with ps; [ ]))
+          ];
+        };
       });
     };
 }

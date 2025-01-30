@@ -16,7 +16,13 @@
     {
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ python312Packages.venvShellHook ];
+          packages = with pkgs; [
+            pyright
+            ruff
+            isort
+            black
+            (python312.withPackages (ps: with ps; [ venvShellHook ]))
+          ];
 
           venvDir = "./venv";
           postVenvCreation = ''
