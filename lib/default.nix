@@ -1,6 +1,12 @@
 lib: ns: extraSettings:
 let
-  inherit (lib) nixosSystem;
+  inherit (lib)
+    nixosSystem
+    attrNames
+    filterAttrs
+    elem
+    hasSuffix
+    ;
 in
 {
   inherit ns;
@@ -45,5 +51,29 @@ in
           inherit (extraSettings) userSettings systemSettings;
         };
       };
+
+    # Get list of all nix files and directories in path for easy importing
+    scanPaths =
+      path:
+      map (f: (path + "/${f}")) (
+        attrNames (
+          filterAttrs (
+            path: _type: (_type == "directory") || ((path != "default.nix") && (hasSuffix ".nix" path))
+          ) (builtins.readDir path)
+        )
+      );
+
+    scanPathsExcept =
+      path: except:
+      map (f: (path + "/${f}")) (
+        attrNames (
+          filterAttrs (
+            path: _type:
+            (_type == "directory")
+            || ((!elem path except) && (path != "default.nix") && (hasSuffix ".nix" path))
+          ) (builtins.readDir path)
+        )
+      );
+
   };
 }
