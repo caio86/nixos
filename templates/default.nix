@@ -1,41 +1,41 @@
 {
   devshell = {
-    path = ./devshells/simple-devshell;
+    path = ./devshells/simple;
     description = "dev shell with nix flakes";
   };
 
-  py-devshell = {
-    path = ./devshells/py-devshell;
+  devshell-py = {
+    path = ./devshells/py;
     description = "python dev shell flake";
   };
 
-  pyvenv-devshell = {
-    path = ./devshells/pyvenv-devshell;
+  devshell-pyvenv = {
+    path = ./devshells/pyvenv;
     description = "python dev shell flake with venv";
   };
 
-  go-devshell = {
-    path = ./devshells/go-devshell;
+  devshell-go = {
+    path = ./devshells/go;
     description = "go dev shell flake";
   };
 
-  js-devshell = {
-    path = ./devshells/js-devshell;
+  devshell-js = {
+    path = ./devshells/js;
     description = "js dev shell flake";
   };
 
-  pop-devshell = {
-    path = ./devshells/pop-devshell;
+  devshell-pop = {
+    path = ./devshells/pop;
     description = "dev shell with justfile for building and running c++ code";
   };
 
-  latex-devshell = {
-    path = ./devshells/latex-devshell;
+  devshell-latex = {
+    path = ./devshells/latex;
     description = "LaTeX devshell for writting PDFs";
   };
 
-  latex-sbc-devshell = {
-    path = ./devshells/latex-sbc-devshell;
+  devshell-latex-sbc = {
+    path = ./devshells/latex-sbc;
     description = "LaTeX devshell for writting PDFs, with SBC template";
   };
 
