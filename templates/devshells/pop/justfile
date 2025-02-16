@@ -23,3 +23,12 @@ run +inputs="input.txt": build
 [no-cd]
 watch +inputs="input.txt":
   watchexec -e "cpp" -r "just run {{inputs}}"
+
+[no-cd]
+init:
+  #!/usr/bin/env bash
+  if [[ ! -f ./main.cpp ]]; then
+    cp {{ justfile_directory() }}/main.cpp .
+  else
+    echo "File 'main.cpp' already exists"
+  fi
