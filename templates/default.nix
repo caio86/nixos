@@ -1,40 +1,40 @@
 {
-  devshell = {
+  empty = {
     path = ./devshells/simple;
     description = "dev shell with nix flakes";
   };
 
-  devshell-py = {
+  py = {
     path = ./devshells/py;
     description = "python dev shell flake";
   };
 
-  devshell-pyvenv = {
+  pyvenv = {
     path = ./devshells/pyvenv;
     description = "python dev shell flake with venv";
   };
 
-  devshell-go = {
+  go = {
     path = ./devshells/go;
     description = "go dev shell flake";
   };
 
-  devshell-js = {
+  js = {
     path = ./devshells/js;
     description = "js dev shell flake";
   };
 
-  devshell-pop = {
+  pop = {
     path = ./devshells/pop;
     description = "dev shell with justfile for building and running c++ code";
   };
 
-  devshell-latex = {
+  latex = {
     path = ./devshells/latex;
     description = "LaTeX devshell for writting PDFs";
   };
 
-  devshell-latex-sbc = {
+  latex-sbc = {
     path = ./devshells/latex-sbc;
     description = "LaTeX devshell for writting PDFs, with SBC template";
   };
