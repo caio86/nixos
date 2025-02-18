@@ -16,7 +16,6 @@ let
     neofetch = "fastfetch";
     duh = "sudo du -h --one-file-system --max-depth=1 --threshold=100k";
     dfh = "df -h -x tmpfs -x devtmpfs";
-    dc = "docker compose";
     fzfd = ''
       escolhido=$(fd -t d | fzf)
       if [ -z "$escolhido" ]; then
@@ -24,6 +23,9 @@ let
       fi
 
       cd $escolhido
+    '';
+    direnvrm = ''
+      fd "\.direnv" -u --type d | fzf -m | while read p; do rm -rf "$p"; done
     '';
   };
 in
@@ -73,6 +75,8 @@ in
     fd
     direnv
     nix-direnv
+    (pkgs.callPackage ../pkgs/dvd.nix { })
+    (pkgs.callPackage ../pkgs/dvt.nix { })
   ];
 
   programs.direnv.enable = true;
