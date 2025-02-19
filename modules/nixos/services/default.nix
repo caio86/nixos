@@ -17,17 +17,10 @@ in
         autoStart = mkEnableOption "auto start";
 
         address = mkOption {
-          type = types.str;
+          type = with types; listOf str;
           default = null;
-          example = "10.0.0.1";
+          example = "10.0.0.1/24";
           description = "Assigned ip address for this device on the VPN network";
-        };
-
-        subnet = mkOption {
-          type = types.int;
-          default = null;
-          example = 24;
-          description = "Subnet of the wireguard network";
         };
 
         listenPort = mkOption {

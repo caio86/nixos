@@ -6,6 +6,11 @@ let
     filterAttrs
     elem
     hasSuffix
+    concatMap
+    imap0
+    singleton
+    mod
+    elemAt
     ;
 in
 {
@@ -73,6 +78,21 @@ in
             || ((!elem path except) && (path != "default.nix") && (hasSuffix ".nix" path))
           ) (builtins.readDir path)
         )
+      );
+
+    asserts =
+      asserts:
+      concatMap (a: a) (
+        imap0 (
+          i: elem:
+          if (mod i 2) == 0 then
+            singleton {
+              assertion = elem;
+              message = (elemAt asserts (i + 1));
+            }
+          else
+            [ ]
+        ) asserts
       );
 
   };

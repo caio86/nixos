@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  hostname,
+  ...
+}:
 let
   inherit (lib)
     ns
@@ -7,18 +12,29 @@ let
     mapAttrsToList
     optional
     ;
+  inherit (lib.${ns}) asserts;
   interfaces = config.${ns}.services.wireguard;
 in
 {
+  assertions = mkMerge (
+    mapAttrsToList (
+      interface: cfg:
+      asserts [
+        (config.sops.secrets."wg-${hostname}-key" != null)
+        "A private key for the host ${hostname} is missing"
+      ]
+    ) interfaces
+  );
+
   networking = mkMerge (
     mapAttrsToList (
       interface: cfg:
       mkIf cfg.enable {
         wg-quick.interfaces."wg-${interface}" = {
-          address = [ "${cfg.address}/${toString cfg.subnet}" ];
+          address = cfg.address;
           listenPort = cfg.listenPort;
           autostart = cfg.autoStart;
-          privateKeyFile = config.sops.secrets."wg-${interface}-key".path;
+          privateKeyFile = config.sops.secrets."wg-${hostname}-key".path;
           dns = mkIf cfg.dns.enable [ cfg.dns.address ];
 
           peers = cfg.peers;
