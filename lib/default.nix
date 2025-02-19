@@ -32,6 +32,7 @@ in
             nixpkgs.hostPlatform = system;
             nixpkgs.buildPlatform = "x86_64-linux";
           }
+          ../modules/nixos
           ../profiles/${hostname}/configuration.nix
         ];
       };
