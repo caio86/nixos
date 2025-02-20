@@ -1,6 +1,6 @@
 {
   empty = {
-    path = ./devshells/simple;
+    path = ./devshells/empty;
     description = "dev shell with nix flakes";
   };
 
