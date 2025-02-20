@@ -10,7 +10,7 @@
   ];
 
   services = {
-    displayManager.sddm = {
+    xserver.displayManager.startx = {
       enable = true;
     };
     xserver.windowManager.dwm = {
