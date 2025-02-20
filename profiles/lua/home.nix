@@ -23,10 +23,10 @@
     ../../user/app/tmux/tmux.nix
     ../../user/shell/sh.nix
     ../../user/shell/cli-apps.nix
-    ../../user/lang/java.nix
-    ../../user/lang/python.nix
-    ../../user/lang/golang.nix
-    ../../user/style/gtk.nix
+    # ../../user/lang/java.nix
+    # ../../user/lang/python.nix
+    # ../../user/lang/golang.nix
+    # ../../user/style/gtk.nix
     # ../../user/style/stylix.nix
   ];
 
