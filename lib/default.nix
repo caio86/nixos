@@ -17,14 +17,24 @@ in
   inherit ns;
   ${ns} = {
     inherit (extraSettings) userSettings systemSettings;
+    flakeUtils = self: {
+      mkHost = lib.${ns}.mkHost self;
+      mkHome = lib.${ns}.mkHome self;
+    };
+
     #=================== Buildables =====================#
 
     mkHost =
-      self: hostname: system:
+      self: hostname: username: system:
       nixosSystem {
         specialArgs = {
           inherit (self) inputs;
-          inherit self hostname lib;
+          inherit
+            self
+            hostname
+            username
+            lib
+            ;
           inherit (extraSettings) userSettings systemSettings;
         };
         modules = [
