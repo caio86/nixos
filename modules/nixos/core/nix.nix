@@ -81,6 +81,14 @@ in
           "nix-command"
         ];
         auto-optimise-store = true;
+        substituters = [
+          "https://nix-community.cachix.org"
+          "https://nix-on-droid.cachix.org"
+        ];
+        trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "nix-on-droid.cachix.org-1:56snoMJTXmDRC1Ei24CmKoUqvHJ9XCp+nidK7qkMQrU="
+        ];
       };
 
       gc = {
