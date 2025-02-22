@@ -1,15 +1,37 @@
 {
   lib,
   pkgs,
+  config,
   username,
+  adminUsername,
   systemSettings,
   ...
 }:
 let
-  inherit (lib) ns mkOption types;
+  inherit (lib)
+    ns
+    mkOption
+    types
+    mkAliasOptionModule
+    ;
 in
 {
-  imports = lib.${ns}.scanPaths ./.;
+  imports = lib.${ns}.scanPaths ./. ++ [
+    (mkAliasOptionModule [ "userPackages" ] [
+      "users"
+      "users"
+      username
+      "packages"
+    ])
+
+    (mkAliasOptionModule [ "adminPackages" ] [
+      "users"
+      "users"
+      adminUsername
+      "packages"
+    ])
+
+  ];
 
   options.${ns}.core = {
 
@@ -18,6 +40,13 @@ in
       readOnly = true;
       default = username;
       description = "The name of the primary user of the system";
+    };
+
+    adminUsername = mkOption {
+      type = types.str;
+      readOnly = true;
+      default = "caiol";
+      description = "The username of the admin user that exists on all hosts";
     };
 
     privilegedUser = mkOption {
@@ -39,6 +68,10 @@ in
       ripgrep
       tree
     ];
+
+    _module.args = {
+      inherit (config.${ns}.core) adminUsername;
+    };
 
     time.timeZone = systemSettings.timezone;
   };
