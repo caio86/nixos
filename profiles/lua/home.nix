@@ -21,11 +21,9 @@
     ../../user/app/terminal/kitty.nix
     ../../user/app/neovim/neovim.nix
     ../../user/app/tmux/tmux.nix
+    ../../user/app/sops.nix
     ../../user/shell/sh.nix
     ../../user/shell/cli-apps.nix
-    # ../../user/lang/java.nix
-    # ../../user/lang/python.nix
-    # ../../user/lang/golang.nix
     # ../../user/style/gtk.nix
     # ../../user/style/stylix.nix
   ];
@@ -34,17 +32,9 @@
 
   # stylix.autoEnable = lib.mkForce false;
 
-  sops = {
-
-    defaultSopsFile = ../../secrets.yaml;
-    validateSopsFiles = false;
-
-    age.keyFile = "/home/caiol/.config/sops/age/keys.txt";
-
-    secrets = {
-      "ssh_keys/lua" = {
-        path = "/home/caiol/.ssh/id_lua";
-      };
+  sops.secrets = {
+    "ssh_keys/lua" = {
+      path = "/home/caiol/.ssh/id_lua";
     };
   };
 
