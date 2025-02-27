@@ -4,7 +4,7 @@
 
 {
   pkgs,
-  systemSettings,
+  hostname,
   userSettings,
   ...
 }:
@@ -76,7 +76,7 @@
   };
 
   # Networking
-  networking.hostName = systemSettings.hostname; # Define your hostname.
+  networking.hostName = hostname; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.interfaces.enp3s0.wakeOnLan.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

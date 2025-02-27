@@ -1,6 +1,7 @@
 {
   inputs,
   self,
+  hostname,
   userSettings,
   ...
 }:
@@ -24,7 +25,7 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.efiInstallAsRemovable = true;
 
-  networking.hostName = "lua";
+  networking.hostName = hostname;
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
 
