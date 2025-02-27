@@ -11,7 +11,6 @@
     (import ./disko.nix { device = "/dev/sda"; })
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
-    ../../system/security/sops.nix
     ../../system/security/gpg.nix
     ../../system/app/docker.nix
     ../../system/wm/dwm.nix
