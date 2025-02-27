@@ -1,9 +1,7 @@
 {
   inputs,
   self,
-  pkgs,
   userSettings,
-  config,
   ...
 }:
 
@@ -45,19 +43,6 @@
       caiol.imports = [ ./home.nix ];
     };
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."caiol" = {
-    isNormalUser = true;
-    hashedPasswordFile = config.sops.secrets.caiol_password.path;
-    shell = pkgs.zsh;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-  };
-
-  sops.secrets."caiol_password".neededForUsers = true;
 
   system.stateVersion = "23.11";
 }
