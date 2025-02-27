@@ -25,24 +25,6 @@
     ../../system/style/stylix.nix
   ];
 
-  # Fix nix path
-  nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=$HOME/.dotfiles/system/hardware-configuration.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-  ];
-
-  # Experimental features
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  # Ensure nix flakes are enabled
-  nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -60,9 +42,6 @@
   };
   networking.firewall.enable = false;
   services.fstrim.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Bootloader.
   boot.supportedFilesystems = [ "ntfs" ];
@@ -102,22 +81,6 @@
   networking.interfaces.enp3s0.wakeOnLan.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Set your time zone.
-  time.timeZone = systemSettings.timezone;
-  # Select internationalisation properties.
-  i18n.defaultLocale = systemSettings.locale;
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = systemSettings.locale;
-    LC_IDENTIFICATION = systemSettings.locale;
-    LC_MEASUREMENT = systemSettings.locale;
-    LC_MONETARY = systemSettings.locale;
-    LC_NAME = systemSettings.locale;
-    LC_NUMERIC = systemSettings.locale;
-    LC_PAPER = systemSettings.locale;
-    LC_TELEPHONE = systemSettings.locale;
-    LC_TIME = systemSettings.locale;
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -142,10 +105,6 @@
     git
     home-manager
   ];
-
-  environment.shells = with pkgs; [ zsh ];
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
 
   fonts.fontDir.enable = true;
 
