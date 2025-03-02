@@ -26,6 +26,8 @@ in
     ) interfaces
   );
 
+  sops.secrets."wg-${hostname}-key" = { };
+
   networking = mkMerge (
     mapAttrsToList (
       interface: cfg:
