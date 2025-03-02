@@ -26,8 +26,6 @@
   ];
 
 
-  services.gnome.gnome-keyring.enable = true;
-
   networking.networkmanager.dns = "none";
   networking.useDHCP = false;
   networking.dhcpcd.enable = false;
