@@ -24,6 +24,11 @@
     description = "js dev shell flake";
   };
 
+  java = {
+    path = ./devshells/java;
+    description = "java dev shell flake";
+  };
+
   pop = {
     path = ./devshells/pop;
     description = "dev shell with justfile for building and running c++ code";
