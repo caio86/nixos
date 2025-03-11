@@ -75,8 +75,8 @@ in
     fd
     direnv
     nix-direnv
-    (pkgs.callPackage ../pkgs/dvd.nix { })
-    (pkgs.callPackage ../pkgs/dvt.nix { })
+    (pkgs.callPackage ../../pkgs/dvd.nix { })
+    (pkgs.callPackage ../../pkgs/dvt.nix { })
   ];
 
   programs.direnv.enable = true;
