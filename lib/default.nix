@@ -3,6 +3,7 @@ let
   inherit (lib)
     nixosSystem
     attrNames
+    genAttrs
     filterAttrs
     elem
     hasSuffix
@@ -18,6 +19,10 @@ in
   ${ns} = {
     inherit (extraSettings) userSettings systemSettings;
     flakeUtils = self: {
+      forEachSystem = lib.${ns}.forEachSystem self [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       mkHost = lib.${ns}.mkHost self;
       mkHome = lib.${ns}.mkHome self;
     };
@@ -67,6 +72,18 @@ in
           inherit (extraSettings) userSettings systemSettings;
         };
       };
+
+    forEachSystem =
+      self: systems: f:
+      genAttrs systems (
+        system:
+        f (
+          import self.inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          }
+        )
+      );
 
     # Get list of all nix files and directories in path for easy importing
     scanPaths =
