@@ -36,12 +36,12 @@
       };
 
       lib = nixpkgs.lib.extend (final: _: import ./lib final "C410l" extraSettings);
-      inherit (lib.${lib.ns}.flakeUtils self) mkHost mkHome;
+      inherit (lib.${lib.ns}.flakeUtils self) mkHost mkHome forEachSystem;
     in
     {
       templates = import ./templates;
-
       overlays = import ./overlays;
+      packages = forEachSystem (pkgs: import ./pkgs pkgs);
 
       nixosConfigurations = {
 
