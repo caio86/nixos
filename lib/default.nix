@@ -41,6 +41,7 @@ in
             lib
             ;
           inherit (extraSettings) userSettings systemSettings;
+          selfPkgs = self.packages.${system};
         };
         modules = [
           {
@@ -70,6 +71,7 @@ in
           inherit (self) inputs;
           inherit lib self username;
           inherit (extraSettings) userSettings systemSettings;
+          selfPkgs = self.packages.${system};
         };
       };
 
