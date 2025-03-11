@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, selfPkgs, ... }:
 
 let
   myAliases = {
@@ -75,8 +75,9 @@ in
     fd
     direnv
     nix-direnv
-    (pkgs.callPackage ../../pkgs/dvd.nix { })
-    (pkgs.callPackage ../../pkgs/dvt.nix { })
+
+    selfPkgs.dvd
+    selfPkgs.dvt
   ];
 
   programs.direnv.enable = true;
