@@ -2,6 +2,7 @@
   config,
   pkgs,
   userSettings,
+  selfPkgs,
   ...
 }:
 
@@ -46,15 +47,7 @@
     feh
     mpv
     cava
-    (pkgs.makeDesktopItem {
-      name = "minecraft";
-      desktopName = "sklauncher";
-      exec = "${pkgs.steam-run}/bin/steam-run ${pkgs.openjdk}/bin/java -jar ${config.home.homeDirectory}/Downloads/SKlauncher-3.2.12.jar";
-      terminal = false;
-      type = "Application";
-    })
-
-    bottles
+    selfPkgs.sklauncher
   ];
 
   services.syncthing.enable = true;
