@@ -14,11 +14,11 @@ pkgs.stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
   installPhase = ''
-    mkdir -pv $out/share/java $out/bin
-    cp ${src} $out/share/java/${name}-${version}.jar
+    mkdir -pv $out/share $out/bin
+    cp ${src} $out/share/${name}-${version}.jar
 
-    makeWrapper ${pkgs.jre}/bin/java $out/bin/sklauncher \
-      --add-flags "-jar $out/share/java/${name}-${version}.jar"
+    makeWrapper ${pkgs.steam-run}/bin/steam-run $out/bin/sklauncher \
+      --add-flags "${pkgs.jre}/bin/java -jar $out/share/${name}-${version}.jar"
   '';
 
   desktopItems = [
