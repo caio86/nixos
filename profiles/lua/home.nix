@@ -46,6 +46,45 @@
     wl-clipboard
   ];
 
+  # TODO put this in a module later
+  home.file.".xinitrc".text = ''
+        xrandr --output Virtual-1 --mode 1920x1080
+
+    if [ -f $HOME/.fehbg ]; then
+      . $HOME/.fehbg
+    fi
+
+    battery() {
+      battery='/sys/class/power_supply/BAT0'
+
+      if [ -d "$battery" ]; then
+        echo -n ' | '
+
+        if grep -q 'Charging' "$battery/status"; then
+          echo -n '+'
+        fi
+
+        tr -d '\n' <"$battery/capacity"
+
+        echo '%'
+      fi
+    }
+
+    while false; do
+      xprop -root -set WM_NAME "$(date '+%A, %B %-d, %-I:%M %p')$(battery)"
+      sleep 15
+    done
+
+    while true; do
+       xsetroot -name "$( date +"%F %R" )"
+       sleep 1m    # Update time every minute
+    done &
+
+    st &
+
+    exec dwm
+  '';
+
   xdg.enable = true;
   xdg.userDirs = {
     enable = true;
