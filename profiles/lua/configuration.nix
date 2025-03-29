@@ -1,6 +1,7 @@
 {
   inputs,
   self,
+  selfPkgs,
   hostname,
   userSettings,
   ...
@@ -37,6 +38,7 @@
     extraSpecialArgs = {
       inherit userSettings;
       inherit inputs;
+      inherit selfPkgs;
     };
 
     users = {
