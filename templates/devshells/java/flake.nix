@@ -31,6 +31,7 @@
           jdk = prev."jdk${toString javaVersion}";
         in
         {
+          inherit jdk;
           maven = prev.maven.override { jdk_headless = jdk; };
           gradle = prev.gradle.override { java = jdk; };
           lombok = prev.lombok.override { inherit jdk; };
