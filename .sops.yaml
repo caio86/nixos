@@ -4,7 +4,6 @@ keys:
   - &hosts:
     - &vega age1xqm2frdrzpya4maje63xrfjdnr26ljr8u0jqd4djswreuzhez3pq4tpx0y
     - &lua age1jq5mfsvzfcz0w5vsdq7w3ycyxh9wgmk7mu9xxnk70xqwumxgyanssp2h9q
-    - &homelab age1e7wg8eed0csfjt6jsa56rpyhpwsuxusly9yj8gdz555zsgf8z45q6c4jup
 creation_rules:
   - path_regex: secrets.yaml
     key_groups:
@@ -12,4 +11,3 @@ creation_rules:
           - *primary
           - *vega
           - *lua
-          - *homelab
