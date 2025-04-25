@@ -1,4 +1,4 @@
-pkgs:
+self: lib: pkgs:
 let
   inherit (pkgs) callPackage;
 in
@@ -11,3 +11,4 @@ in
   tmux-sessionizer = callPackage ./tmux-sessionizer.nix { };
   tmux-windowizer = callPackage ./tmux-windowizer.nix { };
 }
+// import ./installers.nix lib self

@@ -41,7 +41,7 @@
     {
       templates = import ./templates;
       overlays = import ./overlays;
-      packages = forEachSystem (pkgs: import ./pkgs pkgs);
+      packages = forEachSystem (pkgs: import ./pkgs self lib pkgs);
 
       nixosConfigurations = {
 
