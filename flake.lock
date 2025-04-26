@@ -274,6 +274,24 @@
         "type": "github"
       }
     },
+    "nix-secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745622975,
+        "narHash": "sha256-y6EcESKRWSTuluoTQtZqKzB6MvS6QnjSDnS6RmiDxlA=",
+        "ref": "main",
+        "rev": "6bae0d7b27f52a8988e5880f8aa9afd01b0d299a",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@gitlab.com/caio86/nix-secrets.git"
+      },
+      "original": {
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@gitlab.com/caio86/nix-secrets.git"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -393,6 +411,7 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "neovim-config": "neovim-config",
+        "nix-secrets": "nix-secrets",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
