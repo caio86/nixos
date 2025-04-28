@@ -82,6 +82,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
+    hypridle.url = "github:hyprwm/hypridle";
+    hypridle.inputs.nixpkgs.follows = "nixpkgs";
+    hypridle.inputs.hyprutils.follows = "hyprland/hyprutils";
+    hypridle.inputs.hyprland-protocols.follows = "hyprland/hyprland-protocols";
+    hypridle.inputs.hyprlang.follows = "hyprland/hyprlang";
+    hypridle.inputs.hyprwayland-scanner.follows = "hyprland/hyprwayland-scanner";
+
+    hyprlock.url = "github:hyprwm/hyprlock";
+    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
+    hyprlock.inputs.hyprutils.follows = "hyprland/hyprutils";
+    hyprlock.inputs.hyprgraphics.follows = "hyprland/hyprgraphics";
+    hyprlock.inputs.hyprlang.follows = "hyprland/hyprlang";
+    hyprlock.inputs.hyprwayland-scanner.follows = "hyprland/hyprwayland-scanner";
+
     neovim-config.url = "github:caio86/init.lua";
     neovim-config.flake = false;
 
