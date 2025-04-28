@@ -81,6 +81,6 @@
     neovim-config.flake = false;
 
     nix-secrets.url = "git+ssh://git@gitlab.com/caio86/nix-secrets.git?ref=main&shallow=1";
-    nix-secrets.flake = false;
+    nix-secrets.inputs.nixpkgs.follows = "nixpkgs";
   };
 }
