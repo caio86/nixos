@@ -61,7 +61,8 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "nixpkgs/nixos-24.11";
+    nixpkgs-r2modman.url = "nixpkgs/2db4ff7";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -69,8 +70,12 @@
     nixos-wsl.url = "github:nix-community/nixos-wsl";
 
     stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.home-manager.follows = "home-manager";
 
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.inputs.home-manager.follows = "home-manager";
 
     disko = {
       url = "github:nix-community/disko";
