@@ -101,7 +101,6 @@
     wget
     zsh
     git
-    home-manager
   ];
 
   fonts.fontDir.enable = true;

@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   userSettings,
   lib,
   config,
@@ -17,8 +16,6 @@ let
   };
 in
 {
-  imports = [ inputs.stylix.homeManagerModules.stylix ];
-
   options.stylix = {
     blurredImage = lib.mkOption {
       type = lib.types.str;
