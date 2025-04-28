@@ -666,10 +666,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1745806884,
-        "narHash": "sha256-lrRNTg9DmeimEidxkl91xzqzLCKLLeakkoxJG5jib2E=",
+        "lastModified": 1745810306,
+        "narHash": "sha256-NNyq5Cm5yay5zAYTiRvTV6uuNdUBd57LnC1D/u73k9Y=",
         "ref": "main",
-        "rev": "6aeb1418f0e60a963b1d614d33f5721b08606c3d",
+        "rev": "c54ec52fc8570ddbbfa96e13f70830038501b601",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@gitlab.com/caio86/nix-secrets.git"
