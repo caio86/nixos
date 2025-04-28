@@ -1,9 +1,7 @@
 {
   inputs,
   self,
-  selfPkgs,
   hostname,
-  userSettings,
   ...
 }:
 
@@ -30,20 +28,7 @@
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
 
-  home-manager = {
 
-    useGlobalPkgs = true;
-    useUserPackages = true;
-
-    extraSpecialArgs = {
-      inherit userSettings;
-      inherit inputs;
-      inherit selfPkgs;
-    };
-
-    users = {
-      caiol.imports = [ ./home.nix ];
-    };
   };
 
   system.stateVersion = "23.11";
