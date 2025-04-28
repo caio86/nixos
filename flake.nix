@@ -75,7 +75,6 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.inputs.home-manager.follows = "home-manager";
 
     disko = {
       url = "github:nix-community/disko";
