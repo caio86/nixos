@@ -37,7 +37,7 @@
 
     installPhase = ''
       mkdir -p $out
-      cp -r ./minegrub-theme/* $out
+      cp -r ./minegrub/* $out
     '';
   };
 
