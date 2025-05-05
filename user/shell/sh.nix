@@ -41,6 +41,7 @@ in
     shellAliases = myAliases;
     initExtra = ''
       bindkey -s '^f' 'tmux-sessionizer\n'
+      bindkey -s '^[f' 'tmux-sessionizer $PWD\n'
       bindkey -s '^t' 'tmux-navigator\n'
       bindkey -s '^[w' 'tmux-windowizer '
     '';
