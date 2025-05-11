@@ -2,7 +2,6 @@
   config,
   pkgs,
   userSettings,
-  selfPkgs,
   ...
 }:
 
@@ -47,7 +46,7 @@
     feh
     mpv
     cava
-    selfPkgs.sklauncher
+    prismlauncher
   ];
 
   services.syncthing.enable = true;
