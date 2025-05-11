@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   # Import wayland config
@@ -6,11 +6,7 @@
 
   # Security
   security = {
-    pam.services.swaylock = {
-      text = ''
-        auth include login
-      '';
-    };
+    pam.services.hyprlock = { };
   };
 
   programs = {
