@@ -14,6 +14,8 @@
   ];
 
   home.packages = with pkgs; [
+    # inputs.hypridle.packages.${pkgs.stdenv.hostPlatform.system}.hypridle
+    # inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock
     hyprlock
     hypridle
     swww
@@ -28,7 +30,7 @@
       case $1 in
         d) cliphist list | wofi -S dmenu | cliphist delete
           ;;
-          
+
         w) if [ `echo -e "Clear\nCancel" | wofi -S dmenu` == "Clear" ] ; then
             cliphist wipe
           fi
@@ -49,6 +51,9 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # portalPackage =
+    #   inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
     systemd.enable = true;
     settings = {
@@ -167,7 +172,7 @@
       misc = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         force_default_wallpaper = -1;
-        disable_hyprland_logo = false;
+        # disable_hyprland_logo = false;
         disable_splash_rendering = false;
         key_press_enables_dpms = true;
         mouse_move_enables_dpms = true;
@@ -285,7 +290,13 @@
         "size 22% 46%,class:^(org.gnome.Calculator)$"
         "move 39% 27%,class:^(org.gnome.Calculator)$"
 
+        "workspace 10, class:^(steam_app_.*)$"
+        "fullscreen, class:^(steam_app_.*)$"
+        "suppressevent maximize, class:^(steam_app_.*)$"
+        "suppressevent fullscreen, class:^(steam_app_.*)$"
       ];
+
+      workspace = [ "10, border:false, rounding:false" ];
     };
   };
 }
