@@ -26,6 +26,7 @@
       # FORMATTERS
       nodePackages.prettier
       nixfmt-rfc-style
+      shfmt
       stylua
     ];
   };
