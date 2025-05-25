@@ -44,7 +44,7 @@
       txtname="/tmp/screenshot-ocr-$(date +%Y%m%d%H%M%S)"
       txtfname=$txtname.txt
       ${pkgs.sway-contrib.grimshot}/bin/grimshot save area $imgname;
-      ${pkgs.tesseract}/bin/tesseract $imgname $txtname;
+      ${pkgs.tesseract}/bin/tesseract -l por $imgname $txtname;
       wl-copy -n < $txtfname
     '')
   ];
