@@ -290,6 +290,8 @@
         "size 22% 46%,class:^(org.gnome.Calculator)$"
         "move 39% 27%,class:^(org.gnome.Calculator)$"
 
+        "workspace 5 silent, class:^(steam)$"
+
         "workspace 10, class:^(steam_app_.*)$"
         "fullscreen, class:^(steam_app_.*)$"
         "suppressevent maximize, class:^(steam_app_.*)$"
