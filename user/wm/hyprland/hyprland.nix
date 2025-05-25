@@ -206,7 +206,6 @@
         "$mainMod, Q, killactive"
         "$mainMod, C, exec, wl-copy $(${pkgs.hyprpicker}/bin/hyprpicker)"
         "$mainMod, D, exec, brave --app=https://excalidraw.com/"
-        "$mainMod, M, exit"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, T, toggleFloating,"
         "$mainMod SHIFT, T, workspaceopt, allfloat"
