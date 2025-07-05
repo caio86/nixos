@@ -297,7 +297,7 @@
 
         "workspace 5 silent, class:^(steam)$"
 
-        "workspace 10, class:^(steam_app_.*)$"
+        "workspace 5, class:^(steam_app_.*)$"
         "fullscreen, class:^(steam_app_.*)$"
         "suppressevent maximize, class:^(steam_app_.*)$"
         "suppressevent fullscreen, class:^(steam_app_.*)$"
@@ -308,7 +308,7 @@
         "w[tv1], gapsout:0, gapsin:0"
         "f[1], gapsout:0, gapsin:0"
 
-        "10, border:false, rounding:false"
+        "5, border:false, rounding:false"
       ];
     };
   };
