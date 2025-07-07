@@ -87,7 +87,7 @@
 
       "$terminal" = "${userSettings.term}";
       "$fileManager" = "nautilus";
-      "$browser" = "${userSettings.browser}";
+      "$browser" = "$DEFAULT_BROWSER";
       "$menu" = "wofi -i --show drun";
 
       env = [
@@ -205,7 +205,6 @@
         "$mainMod, Return, exec, $terminal"
         "$mainMod, Q, killactive"
         "$mainMod, C, exec, wl-copy $(${pkgs.hyprpicker}/bin/hyprpicker)"
-        "$mainMod, D, exec, brave --app=https://excalidraw.com/"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, T, toggleFloating,"
         "$mainMod SHIFT, T, workspaceopt, allfloat"
