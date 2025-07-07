@@ -11,8 +11,9 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    ../../system/hardware-configuration.nix
+    ./disko.nix
+    ./hardware-configuration.nix
+
     ../../system/hardware/openrgb.nix
     ../../system/app/docker.nix
     ../../system/app/wireshark.nix
