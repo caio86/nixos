@@ -15,7 +15,7 @@ let
     filterAttrs
     isType
     ;
-  configDir = "/home/${adminUsername}/.dotfiles";
+  configDir = "/home/${adminUsername}/.config/nixos";
 
   rebuildCmds = [
     "switch"
