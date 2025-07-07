@@ -77,29 +77,11 @@
         };
       };
     };
-
-    disk.games = {
-      device = "/dev/disk/by-id/nvme-KINGSTON_SNV2S1000G_50026B76866DB965";
-      type = "disk";
-      content = {
-        type = "gpt";
-        partitions = {
-          games = {
-            size = "100%";
-            content = {
-              type = "filesystem";
-              format = "ntfs";
-              mountpoint = "/mnt/games";
-              mountOptions = [
-                "defaults"
-                "umask=000"
-                "dmask=000"
-                "fmask=111"
-              ];
-            };
-          };
-        };
-      };
-    };
   };
+
+  # boot.supportedFilesystems.ntfs = true;
+  # fileSystems."/mnt/games" = {
+  #   device = "/dev/disk/by-id/nvme-KINGSTON_SNV2S1000G_50026B76866DB965";
+  #   fsType = "ntfs";
+  # };
 }
