@@ -77,7 +77,6 @@
   # Networking
   networking.hostName = hostname; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.interfaces.enp3s0.wakeOnLan.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable CUPS to print documents.
