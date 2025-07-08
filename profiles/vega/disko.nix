@@ -79,9 +79,18 @@
     };
   };
 
-  # boot.supportedFilesystems.ntfs = true;
-  # fileSystems."/mnt/games" = {
-  #   device = "/dev/disk/by-id/nvme-KINGSTON_SNV2S1000G_50026B76866DB965";
-  #   fsType = "ntfs";
-  # };
+  boot.supportedFilesystems.ntfs = true;
+  fileSystems."/mnt/games" = {
+    device = "/dev/disk/by-uuid/62E68DDF1D351933";
+    fsType = "ntfs";
+    options = [
+      "rw"
+      "uid=1000"
+      "gid=100"
+      "umask=000"
+      "user"
+      "exec"
+      "nofail"
+    ];
+  };
 }
