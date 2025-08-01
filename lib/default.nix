@@ -41,12 +41,12 @@ in
             lib
             ;
           inherit (extraSettings) userSettings systemSettings;
-          selfPkgs = self.packages.${system};
         };
         modules = [
           {
             nixpkgs.hostPlatform = system;
             nixpkgs.buildPlatform = "x86_64-linux";
+            nixpkgs.overlays = [ (_: _: { ${ns} = self.packages.${system}; }) ];
           }
           ../modules/nixos
           ../profiles/${hostname}
@@ -65,13 +65,15 @@ in
           config.allowUnfree = true;
         };
 
-        modules = [ ../profiles/${username}/home.nix ];
+        modules = [
+          { overlays = [ (_: _: { ${ns} = self.packages.${system}; }) ]; }
+          ../profiles/${username}/home.nix
+        ];
 
         extraSpecialArgs = {
           inherit (self) inputs;
           inherit lib self username;
           inherit (extraSettings) userSettings systemSettings;
-          selfPkgs = self.packages.${system};
         };
       };
 
@@ -83,9 +85,13 @@ in
           import self.inputs.nixpkgs {
             inherit system;
             config.allowUnfree = true;
+            overlays = [ (_: _: { ${ns} = self.packages.${system}; }) ];
           }
         )
       );
+
+    flakePkgs =
+      args: flake: args.inputs.${flake}.packages.${args.options._module.args.value.pkgs.system};
 
     # Get list of all nix files and directories in path for easy importing
     scanPaths =

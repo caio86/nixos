@@ -56,7 +56,7 @@ in
 
     extraSpecialArgs = {
       inherit inputs hostname;
-      inherit (args) self selfPkgs userSettings;
+      inherit (args) self userSettings;
     };
 
     users = {

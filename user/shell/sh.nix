@@ -1,6 +1,7 @@
-{ pkgs, selfPkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
+  inherit (lib) ns;
   myAliases = {
     c = "clear";
     py = "python3";
@@ -77,8 +78,8 @@ in
     direnv
     nix-direnv
 
-    selfPkgs.dvd
-    selfPkgs.dvt
+    pkgs.${ns}.dvd
+    pkgs.${ns}.dvt
   ];
 
   programs.direnv.enable = true;
