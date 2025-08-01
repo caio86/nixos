@@ -18,8 +18,11 @@
 
   # Virtual Box
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableKvm = true;
   virtualisation.virtualbox.host.enableHardening = false;
-  virtualisation.virtualbox.host.addNetworkInterface = false;
   users.extraGroups.vboxusers.members = [ "${userSettings.username}" ];
+
+  # Enabling kvm requires network interface to be off
+  virtualisation.virtualbox.host.enableKvm = false;
+  # Vagrant needs this to be true to work
+  virtualisation.virtualbox.host.addNetworkInterface = true;
 }
