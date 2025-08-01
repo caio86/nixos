@@ -5,6 +5,7 @@ in
 {
   dvd = callPackage ./dvd.nix { };
   dvt = callPackage ./dvt.nix { };
+  bmv2 = callPackage ./bmv2.nix { };
   sklauncher = callPackage ./sklauncher.nix { };
   tmux-cht = callPackage ./tmux-cht.nix { };
   tmux-navigator = callPackage ./tmux-navigator.nix { };
