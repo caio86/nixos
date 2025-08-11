@@ -7,7 +7,7 @@
   automake,
   libtool,
   pkg-config,
-  python3,
+  python311,
   boost,
   libpcap,
   thrift,
@@ -39,7 +39,7 @@ stdenv.mkDerivation (finalAttrs: rec {
     automake
     libtool
     pkg-config
-    python3
+    python311
     makeWrapper
   ];
 
@@ -55,7 +55,7 @@ stdenv.mkDerivation (finalAttrs: rec {
     grpc
     protobuf
     p4c
-    (python3.withPackages (ps: [ ps.thrift ]))
+    (python311.withPackages (ps: [ ps.thrift ]))
   ];
 
   preConfigure = ''
@@ -75,6 +75,26 @@ stdenv.mkDerivation (finalAttrs: rec {
 
     rmdir $out/usr/local
     rmdir $out/usr
+
+    wrapProgram "$out/bin/bm_nanomsg_events" \
+      --prefix PYTHONPATH : "$PYTHONPATH" \
+      --prefix PYTHONPATH : "$out/${python311.sitePackages}"
+
+    wrapProgram "$out/bin/bm_p4dbg" \
+      --prefix PYTHONPATH : "$PYTHONPATH" \
+      --prefix PYTHONPATH : "$out/${python311.sitePackages}"
+
+    wrapProgram "$out/bin/simple_switch_CLI" \
+      --prefix PYTHONPATH : "$PYTHONPATH" \
+      --prefix PYTHONPATH : "$out/${python311.sitePackages}"
+
+    wrapProgram "$out/bin/bm_CLI" \
+      --prefix PYTHONPATH : "$PYTHONPATH" \
+      --prefix PYTHONPATH : "$out/${python311.sitePackages}"
+
+    wrapProgram "$out/bin/psa_switch_CLI" \
+      --prefix PYTHONPATH : "$PYTHONPATH" \
+      --prefix PYTHONPATH : "$out/${python311.sitePackages}"
   '';
 
   meta = {
