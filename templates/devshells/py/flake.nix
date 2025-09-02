@@ -28,6 +28,11 @@
             pkgs.stdenv.cc.cc.lib
             pkgs.libz
           ];
+
+          shellHook = ''
+            test -d .nix-venv || ${pkgs.python3.interpreter} -m venv .nix-venv
+            source .nix-venv/bin/activate
+          '';
         };
       });
     };
