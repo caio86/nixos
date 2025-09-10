@@ -47,6 +47,11 @@
     mpv
     cava
     prismlauncher
+    (retroarch.override {
+      cores = with libretro; [
+        swanstation
+      ];
+    })
   ];
 
   services.syncthing.enable = true;
