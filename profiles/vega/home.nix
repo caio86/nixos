@@ -1,10 +1,14 @@
 {
   config,
   pkgs,
+  lib,
   userSettings,
   ...
 }:
 
+let
+  inherit (lib) ns;
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -46,7 +50,8 @@
     feh
     mpv
     cava
-    prismlauncher
+    pkgs.${ns}.sklauncher
+
     (retroarch.override {
       cores = with libretro; [
         swanstation
