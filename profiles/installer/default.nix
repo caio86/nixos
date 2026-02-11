@@ -70,10 +70,34 @@ let
       echo "admin_username = $admin_username"
       echo "has_disko = $has_disko"
 
-      if [ "$has_disko" = "false" ]; then
-          echo "The host does not have a disko config"
-          echo "You'll need to manually formatted and partitioned the disk then mounted it to /mnt";
-          read -p "Have you done this? (y/N): " -n 1 -r
+      disko_mode="none"
+
+      if [ "$has_disko" = "true" ]; then
+        echo "Disko configuration found for $hostname."
+        read -p "Do you want to FORMAT the disks? (WARNING: ALL DATA WILL BE DESTROYED) (y/N): " -n 1 -r
+        echo
+        if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+           echo "WARNING: All data on the drive specified in the disko config of host '$hostname' will be destroyed"
+           read -p "Are you absolutely sure you want to proceed? (y/N): " -n 1 -r
+           echo
+           if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+             disko_mode="format"
+           else
+             echo "Aborting format selection."
+           fi
+        else
+           read -p "Do you want to MOUNT existing partitions using disko? (Preserves data) (y/N): " -n 1 -r
+           echo
+           if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+             disko_mode="mount"
+           fi
+        fi
+      fi
+
+      if [ "$disko_mode" = "none" ]; then
+          echo "No automated disk setup selected."
+          echo "You'll need to manually format/mount the disk to /mnt";
+          read -p "Is the target filesystem mounted at /mnt? (y/N): " -n 1 -r
           echo
         if [[ ! "$REPLY" =~ ^[yY]$ ]]; then
           echo "Aborting" >&2
@@ -89,16 +113,6 @@ let
       else
         if ! nix store ping --store "ssh://$build_host" &> /dev/null; then
           echo "Error: build host $build_host cannot be pinged, aborting" >&2
-          exit 1
-        fi
-      fi
-
-      if [ "$has_disko" = "true" ]; then
-        echo "WARNING: All data on the drive specified in the disko config of host '$hostname' will be destroyed"
-        read -p "Are you sure you want to proceed? (y/N): " -n 1 -r
-        echo
-        if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
-          echo "Aborting" >&2
           exit 1
         fi
       fi
@@ -133,9 +147,12 @@ let
       }
 
       run_disko() {
-        if [ "$has_disko" = "true" ]; then
+        if [ "$disko_mode" = "format" ]; then
           echo "### Running disko format and mount ###"
           disko --mode disko --flake "$flake#$hostname"
+        elif [ "$disko_mode" = "mount" ]; then
+          echo "### Running disko mount (no formatting) ###"
+          disko --mode mount --flake "$flake#$hostname"
         fi
       }
 
