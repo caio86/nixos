@@ -22,7 +22,7 @@
     ../../system/app/virtualization.nix
     ../../system/security/gpg.nix
     ../../system/security/automount.nix
-    ../../system/wm/hyprland.nix
+    ../../system/wm/plasma.nix
     ../../system/style/stylix.nix
   ];
 
