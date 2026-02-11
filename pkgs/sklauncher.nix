@@ -12,11 +12,11 @@ let
 in
 pkgs.stdenv.mkDerivation rec {
   name = "SKlauncher";
-  version = "3.2.12";
+  version = "3.2.18";
 
   src = pkgs.fetchurl {
     url = "https://skmedix.pl/binaries/skl/${version}/${name}-${version}.jar";
-    hash = "sha256-o5EuHptOOy1TYskRdkRMfVsaFUN8uCfxI+TKKw0Sw/k=";
+    hash = "sha256-Jac+N3Ch2NFLzlPokg4uiTqsw8cV0Psi+HjvIJDQOGM=";
   };
 
   dontUnpack = true;
