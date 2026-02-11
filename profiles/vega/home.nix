@@ -38,8 +38,6 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    # File explorer
-    gnome.nautilus
     fzf
     bat
     eza
@@ -52,11 +50,9 @@ in
     cava
     pkgs.${ns}.sklauncher
 
-    (retroarch.override {
-      cores = with libretro; [
-        swanstation
-      ];
-    })
+    (rhtroarch.override { cores = with libretro; [ swanstation ]; })
+
+    obsidian
   ];
 
   services.syncthing.enable = true;
