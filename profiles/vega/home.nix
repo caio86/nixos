@@ -50,7 +50,7 @@ in
     cava
     pkgs.${ns}.sklauncher
 
-    (rhtroarch.override { cores = with libretro; [ swanstation ]; })
+    (retroarch.override { cores = with libretro; [ swanstation ]; })
 
     obsidian
   ];
