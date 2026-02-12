@@ -25,11 +25,7 @@
       };
 
       # configure pkgs
-      nixpkgs-unstable = inputs.nixpkgs;
-
-      nixpkgs-stable = inputs.nixpkgs-stable;
-
-      nixpkgs = nixpkgs-unstable;
+      nixpkgs = inputs.nixpkgs;
 
       extraSettings = {
         inherit systemSettings userSettings;
@@ -61,8 +57,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-24.11";
-    nixpkgs-r2modman.url = "nixpkgs/2db4ff7";
+    nixpkgs-new.url = "nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
