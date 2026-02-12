@@ -7,8 +7,8 @@
 
 let
   backgroundImage = pkgs.fetchurl {
-    url = "https://w.wallhaven.cc/full/m3/wallhaven-m3gxg8.png";
-    hash = "sha256-aSgwSZpIRKMdCNYbbpyY3GCb8C8B71SwsH6NYWVA41k=";
+    url = "https://w.wallhaven.cc/full/x6/wallhaven-x6x3gz.png";
+    hash = "sha256-Yvtnxaj32YXpUkXQKF1VNcApQf0v3JXGp9TNAsoJmbM=";
   };
 in
 {
