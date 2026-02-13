@@ -93,6 +93,9 @@
     hyprlock.inputs.hyprlang.follows = "hyprland/hyprlang";
     hyprlock.inputs.hyprwayland-scanner.follows = "hyprland/hyprwayland-scanner";
 
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     neovim-config.url = "github:caio86/init.lua";
     neovim-config.flake = false;
 

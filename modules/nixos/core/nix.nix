@@ -6,15 +6,17 @@
   hostname,
   adminUsername,
   ...
-}:
+}@args:
 let
   inherit (lib)
+    ns
     mapAttrs
     mapAttrsToList
     optionalString
     filterAttrs
     isType
     ;
+  inherit (lib.${ns}) flakePkgs;
   configDir = "/home/${adminUsername}/.config/nixos";
 
   rebuildCmds = [
@@ -97,6 +99,12 @@ in
         options = "--delete-older-than 7d";
       };
     };
+
+  programs.command-not-found.enable = false;
+  programs.nix-index = {
+    enable = true;
+    package = (flakePkgs args "nix-index-database").nix-index-with-db;
+  };
 
   programs.zsh = {
     interactiveShellInit = # bash
