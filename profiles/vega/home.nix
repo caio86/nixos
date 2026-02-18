@@ -26,13 +26,13 @@ in
     ../../user/app/tmux/tmux.nix
     ../../user/shell/sh.nix
     ../../user/shell/cli-apps.nix
-    ../../user/wm/hyprland/hyprland.nix
+    # ../../user/wm/hyprland/hyprland.nix
     ../../user/lang/k8s.nix
     ../../user/lang/rust.nix
     ../../user/lang/golang.nix
     ../../user/lang/python.nix
     ../../user/style/gtk.nix
-    ../../user/style/stylix.nix
+    # ../../user/style/stylix.nix
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
@@ -50,7 +50,7 @@ in
     cava
     pkgs.${ns}.sklauncher
 
-    (retroarch.override { cores = with libretro; [ swanstation ]; })
+    (retroarch.withCores (cores: with cores; [ swanstation ]))
 
     obsidian
   ];

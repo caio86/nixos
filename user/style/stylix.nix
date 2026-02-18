@@ -3,6 +3,7 @@
   userSettings,
   lib,
   config,
+  inputs,
   ...
 }:
 
@@ -16,6 +17,8 @@ let
   };
 in
 {
+  imports = [ inputs.stylix.homeModules.stylix ];
+
   options.stylix = {
     blurredImage = lib.mkOption {
       type = lib.types.str;
@@ -38,7 +41,7 @@ in
     stylix.fonts = {
       monospace = {
         name = "JetBrainsMono Nerd Font Mono";
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        package = pkgs.nerd-fonts.jetbrains-mono;
       };
       sansSerif = {
         name = "DejaVu Sans";

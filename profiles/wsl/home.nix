@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   userSettings,
   ...
 }:
@@ -31,7 +30,7 @@
     eza
     pass
     wl-clipboard
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
   ];
 
   xdg.enable = true;

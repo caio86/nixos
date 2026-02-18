@@ -6,13 +6,9 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       # Fonts
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "JetBrainsMono"
-          "Inconsolata"
-        ];
-      })
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.inconsolata
       dejavu_fonts
       font-awesome
       noto-fonts-emoji-blob-bin
