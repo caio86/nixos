@@ -12,7 +12,7 @@
       name = "FiraCode Nerd Font";
       size = 10;
     };
-    theme = "Catppuccin-Mocha";
+    themeFile = "Catppuccin-Mocha";
     settings = {
       # background_opacity = lib.mkForce "0.90";
       # tab_bar_min_tabs = 1;

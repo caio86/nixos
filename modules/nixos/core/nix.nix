@@ -45,7 +45,7 @@ let
           pushd ~ >/dev/null 2>&1
 
           nixos-rebuild ${if (cmd == "diff") then "build" else cmd} \
-            --use-remote-sudo --flake "$flake#${hostname}" ${optionalString (cmd != "boot") "--fast"} "$@"
+            --sudo --flake "$flake#${hostname}" ${optionalString (cmd != "boot") "--no-reexec"} "$@"
           ${optionalString (cmd == "diff") "nvd diff /run/current-system result"}
         '';
     }

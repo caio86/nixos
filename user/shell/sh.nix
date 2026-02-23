@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 let
   inherit (lib) ns;
@@ -36,11 +41,12 @@ in
   programs.starship.enableBashIntegration = false;
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = myAliases;
-    initExtra = ''
+    initContent = ''
       bindkey -s '^f' 'tmux-sessionizer\n'
       bindkey -s '^[f' 'tmux-sessionizer $PWD\n'
       bindkey -s '^t' 'tmux-navigator\n'

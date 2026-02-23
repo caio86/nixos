@@ -3,9 +3,9 @@
 {
   programs.git = {
     enable = true;
-    userName = "caio86";
-    userEmail = userSettings.email;
-    extraConfig = {
+    settings = {
+      user.name = "caio86";
+      user.email = userSettings.email;
       init.defaultBranch = "main";
       credential.helper = "cache --timeout=7200";
       core = {
