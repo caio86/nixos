@@ -91,6 +91,7 @@
       "user"
       "exec"
       "nofail"
+      "noatime"
     ];
   };
 }

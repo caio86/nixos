@@ -31,8 +31,6 @@ in
     ../../user/lang/rust.nix
     ../../user/lang/golang.nix
     ../../user/lang/python.nix
-    ../../user/style/gtk.nix
-    # ../../user/style/stylix.nix
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.

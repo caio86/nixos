@@ -14,7 +14,6 @@
     ./disko.nix
     ./hardware-configuration.nix
 
-    ../../system/hardware/openrgb.nix
     ../../system/app/docker.nix
     ../../system/app/wireshark.nix
     ../../system/app/gamemode.nix
@@ -23,7 +22,6 @@
     ../../system/security/gpg.nix
     ../../system/security/automount.nix
     ../../system/wm/plasma.nix
-    # ../../system/style/stylix.nix
   ];
 
   programs.zsh.shellAliases = {
