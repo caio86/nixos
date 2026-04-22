@@ -46,9 +46,14 @@ in
     feh
     mpv
     cava
-    pkgs.${ns}.sklauncher
+    prismlaucher
 
-    (retroarch.withCores (cores: with cores; [ swanstation ]))
+    dolphin-emu
+    (retroarch.withCores (
+      cores: with cores; [
+        swanstation
+      ]
+    ))
 
     obsidian
   ];
