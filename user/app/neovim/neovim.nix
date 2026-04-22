@@ -24,7 +24,7 @@
       nil
 
       # FORMATTERS
-      nodePackages.prettier
+      prettier
       nixfmt
       shfmt
       stylua
