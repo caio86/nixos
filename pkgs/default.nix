@@ -11,5 +11,6 @@ in
   tmux-navigator = callPackage ./tmux-navigator.nix { };
   tmux-sessionizer = callPackage ./tmux-sessionizer.nix { };
   tmux-windowizer = callPackage ./tmux-windowizer.nix { };
+  es-de = callPackage ./es-de.nix { };
 }
 // import ./installers.nix lib self
