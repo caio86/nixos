@@ -31,11 +31,6 @@
     '';
   };
 
-  networking.networkmanager.dns = "none";
-  networking.useDHCP = false;
-  networking.dhcpcd.enable = false;
-  networking.nameservers = [ "192.168.0.254" ];
-
   services.openssh = {
     enable = true;
     openFirewall = true;
