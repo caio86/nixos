@@ -73,7 +73,6 @@ in
     desktop = null;
     publicShare = null;
   };
-  xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
     "image/png" = "feh.desktop";
