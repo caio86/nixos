@@ -3,12 +3,16 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  lib,
   pkgs,
   hostname,
   userSettings,
   ...
 }:
 
+let
+  inherit (lib) ns;
+in
 {
   imports = [
     ./disko.nix
@@ -100,6 +104,10 @@
     wget
     zsh
     git
+
+    (pkgs.${ns}.es-de)
+    dolphin-emu
+    retroarch-full
   ];
 
   fonts.fontDir.enable = true;

@@ -48,12 +48,6 @@ in
     cava
     prismlaucher
 
-    dolphin-emu
-    (retroarch.withCores (
-      cores: with cores; [
-        swanstation
-      ]
-    ))
 
     obsidian
   ];
