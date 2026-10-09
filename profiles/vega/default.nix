@@ -22,7 +22,7 @@ in
     ../../system/app/wireshark.nix
     ../../system/app/gamemode.nix
     ../../system/app/steam.nix
-    # ../../system/app/virtualization.nix
+    ../../system/app/virtualization.nix
     ../../system/security/gpg.nix
     ../../system/security/automount.nix
     ../../system/wm/plasma.nix
@@ -43,10 +43,15 @@ in
     };
   };
   networking.firewall.enable = false;
+  networking.useDHCP = lib.mkDefault true;
+  networking.interfaces.enp4s0.wakeOnLan.enable = true;
   services.fstrim.enable = true;
 
   # Bootloader.
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = [
+    "ntfs"
+    "nfs"
+  ];
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
