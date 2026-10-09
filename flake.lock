@@ -525,16 +525,16 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1737900517,
-        "narHash": "sha256-uwLH5x48Il2ZVJ8SvD++NnJsxzgVQflAFV2dCGJ9Rqs=",
+        "lastModified": 1791510937,
+        "narHash": "sha256-mesTA3StaRgNg4WPwIlzKcXVRfSg9eRp53CpUfcK+WU=",
         "owner": "caio86",
-        "repo": "init.lua",
-        "rev": "5ccf01622cf8062f54950c87d07e8db6677fe617",
+        "repo": "nvim",
+        "rev": "66977d152e924e9ae5238ae0c9482ae2b698cdb7",
         "type": "github"
       },
       "original": {
         "owner": "caio86",
-        "repo": "init.lua",
+        "repo": "nvim",
         "type": "github"
       }
     },

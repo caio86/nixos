@@ -91,7 +91,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-config.url = "github:caio86/init.lua";
+    neovim-config.url = "github:caio86/nvim";
     neovim-config.flake = false;
 
     nix-secrets.url = "git+ssh://git@gitlab.com/caio86/nix-secrets.git?ref=main&shallow=1";
