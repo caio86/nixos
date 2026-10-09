@@ -28,10 +28,8 @@
 
           windows = {
             size = "400G";
-            type = "0700";
             content = {
-              type = "filesystem";
-              format = "ntfs";
+              type = "btrfs";
             };
           };
 
