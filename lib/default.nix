@@ -91,7 +91,7 @@ in
       );
 
     flakePkgs =
-      args: flake: args.inputs.${flake}.packages.${args.options._module.args.value.pkgs.system};
+      { inputs, pkgs, ... }: flake: inputs.${flake}.packages.${pkgs.stdenv.hostPlatform.system};
 
     # Get list of all nix files and directories in path for easy importing
     scanPaths =

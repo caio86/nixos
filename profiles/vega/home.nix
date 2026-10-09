@@ -4,10 +4,11 @@
   lib,
   userSettings,
   ...
-}:
+}@args:
 
 let
   inherit (lib) ns;
+  inherit (lib.${ns}) flakePkgs;
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -26,37 +27,36 @@ in
     ../../user/app/tmux/tmux.nix
     ../../user/shell/sh.nix
     ../../user/shell/cli-apps.nix
-    # ../../user/wm/hyprland/hyprland.nix
     ../../user/lang/k8s.nix
-    ../../user/lang/rust.nix
-    ../../user/lang/golang.nix
-    ../../user/lang/python.nix
   ];
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+  services.syncthing.enable = true;
+
+  programs.fzf.enable = true;
+  programs.bat.enable = true;
+  programs.eza.enable = true;
+  programs.password-store.enable = false;
+
   home.packages = with pkgs; [
-    fzf
-    bat
-    eza
-    pass
     wl-clipboard
 
     # Media
     feh
     mpv
     cava
-    prismlaucher
-
+    (flakePkgs args "prism-launcher").default
 
     obsidian
-  ];
 
-  services.syncthing.enable = true;
+    python3
+  ];
 
   xdg.enable = true;
   xdg.userDirs = {
     enable = true;
+    setSessionVariables = true;
     createDirectories = true;
     music = "${config.home.homeDirectory}/Media/Músicas";
     videos = "${config.home.homeDirectory}/Media/Vídeos";
