@@ -9,11 +9,6 @@
     description = "python dev shell flake";
   };
 
-  pyvenv = {
-    path = ./devshells/pyvenv;
-    description = "python dev shell flake with venv";
-  };
-
   go = {
     path = ./devshells/go;
     description = "go dev shell flake";
