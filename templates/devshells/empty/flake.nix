@@ -1,4 +1,6 @@
 {
+  description = "Empty dev shell";
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
   };
@@ -9,6 +11,8 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
       ];
       forAllSystems =
         function: nixpkgs.lib.genAttrs systems (system: function (nixpkgs.legacyPackages.${system}));
