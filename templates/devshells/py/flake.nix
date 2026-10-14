@@ -29,7 +29,7 @@
             ruff
           ];
 
-          env = pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+          env = pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
             LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
               pkgs.stdenv.cc.cc.lib
               pkgs.zlib
