@@ -9,31 +9,49 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
       ];
-      forAllSystems =
-        function: nixpkgs.lib.genAttrs systems (system: function (nixpkgs.legacyPackages.${system}));
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      devShells = forAllSystems (pkgs: {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-            pyright
-            ruff
-            isort
-            black
-            python3
+      devShells = forAllSystems (
+        pkgs:
+        let
+          python = pkgs.python3;
+
+          runtime = [
+            python
           ];
 
-          env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-            pkgs.stdenv.cc.cc.lib
-            pkgs.libz
+          tools = with pkgs; [
+            basedpyright
+            ruff
           ];
+
+          env = pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+            LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+              pkgs.stdenv.cc.cc.lib
+              pkgs.zlib
+            ];
+          };
 
           shellHook = ''
-            test -d .nix-venv || ${pkgs.python3.interpreter} -m venv .nix-venv
-            source .nix-venv/bin/activate
+            test -d .venv || ${python.interpreter} -m venv .venv
+            source .venv/bin/activate
           '';
-        };
-      });
+        in
+        {
+          default = pkgs.mkShell {
+            packages = runtime ++ tools;
+            inherit env shellHook;
+          };
+
+          runtime = pkgs.mkShell {
+            packages = runtime;
+            inherit env shellHook;
+          };
+        }
+      );
     };
 }

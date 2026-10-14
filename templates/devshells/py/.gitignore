@@ -1,2 +1,8 @@
 .direnv
-.venv
+.venv/
+__pycache__/
+*.egg-info/
+dist/
+.ruff_cache/
+.pytest_cache/
+
