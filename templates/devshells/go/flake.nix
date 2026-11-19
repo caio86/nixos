@@ -9,9 +9,10 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
       ];
-      forAllSystems =
-        function: nixpkgs.lib.genAttrs systems (system: function (nixpkgs.legacyPackages.${system}));
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
       devShells = forAllSystems (pkgs: {

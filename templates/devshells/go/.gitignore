@@ -1,1 +1,6 @@
 .direnv
+bin/
+*.test
+*.out
+coverage.txt
+
