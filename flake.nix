@@ -32,7 +32,7 @@
       };
 
       lib = nixpkgs.lib.extend (final: _: import ./lib final "C410l" extraSettings);
-      inherit (lib.${lib.ns}.flakeUtils self) mkHost mkHome forEachSystem;
+      inherit (lib.${lib.ns}.flakeUtils self) mkHost forEachSystem;
     in
     {
       templates = import ./templates;
@@ -44,13 +44,6 @@
         vega = mkHost "vega" "caiol" "x86_64-linux";
 
         lua = mkHost "lua" "caiol" "x86_64-linux";
-
-      };
-
-      homeConfigurations = {
-
-        user = mkHome "vega" "x86_64-linux";
-        lua = mkHome "lua" "x86_64-linux";
 
       };
     };

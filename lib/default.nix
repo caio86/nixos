@@ -24,7 +24,6 @@ in
         "aarch64-linux"
       ];
       mkHost = lib.${ns}.mkHost self;
-      mkHome = lib.${ns}.mkHome self;
     };
 
     #=================== Buildables =====================#
@@ -51,30 +50,6 @@ in
           ../modules/nixos
           ../profiles/${hostname}
         ];
-      };
-
-    mkHome =
-      self: username: system:
-      let
-        inherit (self.inputs) nixpkgs home-manager;
-        lib = nixpkgs.lib.extend (final: _: { inherit lib; } // home-manager.lib);
-      in
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-
-        modules = [
-          { overlays = [ (_: _: { ${ns} = self.packages.${system}; }) ]; }
-          ../profiles/${username}/home.nix
-        ];
-
-        extraSpecialArgs = {
-          inherit (self) inputs;
-          inherit lib self username;
-          inherit (extraSettings) userSettings systemSettings;
-        };
       };
 
     forEachSystem =

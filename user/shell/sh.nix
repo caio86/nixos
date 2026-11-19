@@ -58,7 +58,6 @@ in
       plugins = [
         "git"
         "git-auto-fetch"
-        "command-not-found"
         "sudo"
         "aliases"
         "kubectl"

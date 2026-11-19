@@ -4,7 +4,7 @@
 
   disko.devices = {
     disk.main = {
-      device = "/dev/disk/by-id/nvme-KINGSTON_SNV3S1000G_50026B76870DFBE4"; # TODO: this
+      device = "/dev/disk/by-id/nvme-KINGSTON_SNV3S1000G_50026B76870DFBE4";
       type = "disk";
       content = {
         type = "gpt";
@@ -26,6 +26,7 @@
             };
           };
 
+          # Spare partition (named "windows" on disk); not mounted by NixOS.
           windows = {
             size = "400G";
             content = {
@@ -49,13 +50,15 @@
               extraArgs = [ "-f" ];
 
               subvolumes = {
+                # btrfs applies compression from the first mount of the
+                # filesystem, so it must be set on "/" to take effect.
                 "@" = {
+                  mountOptions = [ "compress=zstd" ];
                   mountpoint = "/";
                 };
 
                 "@home" = {
                   mountOptions = [
-                    "subvol=home"
                     "compress=zstd"
                   ];
                   mountpoint = "/home";
@@ -63,7 +66,6 @@
 
                 "@nix" = {
                   mountOptions = [
-                    "subvol=nix"
                     "compress=zstd"
                     "noatime"
                   ];
