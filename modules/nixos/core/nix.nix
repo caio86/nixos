@@ -2,22 +2,22 @@
   lib,
   pkgs,
   self,
+  config,
   inputs,
   hostname,
-  adminUsername,
   ...
 }@args:
 let
   inherit (lib)
-    ns
     mapAttrs
     mapAttrsToList
     optionalString
     filterAttrs
     isType
     ;
-  inherit (lib.${ns}) flakePkgs;
-  configDir = "/home/${adminUsername}/.config/nixos";
+  inherit (lib.C410l) flakePkgs;
+  username = config.C410l.user.name;
+  configDir = "/home/${username}/.config/nixos";
 
   rebuildCmds = [
     "switch"
@@ -41,8 +41,10 @@ let
             echo "Flake does not exist locally, using remote from github"
             flake="github:caio86/nixos"
           fi
-          trap "popd >/dev/null 2>&1 || true" EXIT
-          pushd ~ >/dev/null 2>&1
+          # Run from a temp dir so `build`/`diff` don't leave a ./result link around
+          tmp=$(mktemp -d)
+          trap 'popd >/dev/null 2>&1 || true; rm -rf "$tmp"' EXIT
+          pushd "$tmp" >/dev/null 2>&1
 
           nixos-rebuild ${if (cmd == "diff") then "build" else cmd} \
             --sudo --flake "$flake#${hostname}" ${optionalString (cmd != "boot") "--no-reexec"} "$@"
@@ -52,7 +54,8 @@ let
   ) rebuildCmds;
 in
 {
-  adminPackages = [ pkgs.nvd ] ++ rebuild-scripts;
+  # rebuild-switch, rebuild-test, rebuild-diff, ...
+  users.users.${username}.packages = [ pkgs.nvd ] ++ rebuild-scripts;
   # Useful for finding the exact config that built a generation
   environment.etc.current-flake.source = self;
 

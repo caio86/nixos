@@ -1,97 +1,45 @@
-lib: ns: extraSettings:
+# Helpers available everywhere as `lib.C410l.*`.
+lib:
 let
   inherit (lib)
     nixosSystem
-    attrNames
-    genAttrs
-    filterAttrs
-    elem
+    filter
     hasSuffix
-    concatMap
-    imap0
-    singleton
-    mod
-    elemAt
     ;
 in
 {
-  inherit ns;
-  ${ns} = {
-    inherit (extraSettings) userSettings systemSettings;
-    flakeUtils = self: {
-      forEachSystem = lib.${ns}.forEachSystem self [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-      mkHost = lib.${ns}.mkHost self;
-    };
-
-    #=================== Buildables =====================#
-
+  C410l = {
+    # Build a NixOS system from hosts/<hostname>. All modules in
+    # modules/nixos are always imported; hosts turn features on via options.
     mkHost =
-      self: hostname: username: system:
+      self: hostname: system:
       nixosSystem {
         specialArgs = {
           inherit (self) inputs;
-          inherit
-            self
-            hostname
-            username
-            lib
-            ;
-          inherit (extraSettings) userSettings systemSettings;
+          inherit self hostname lib;
         };
         modules = [
           {
             nixpkgs.hostPlatform = system;
-            nixpkgs.buildPlatform = "x86_64-linux";
-            nixpkgs.overlays = [ (_: _: { ${ns} = self.packages.${system}; }) ];
+            # Own packages from pkgs/ are available as `pkgs.C410l.<name>`
+            nixpkgs.overlays = [ (_: _: { C410l = self.packages.${system}; }) ];
           }
           ../modules/nixos
-          ../profiles/${hostname}
+          ../hosts/${hostname}
         ];
       };
 
-    forEachSystem =
-      self: systems: f:
-      genAttrs systems (
-        system:
-        f (
-          import self.inputs.nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [ (_: _: { ${ns} = self.packages.${system}; }) ];
-          }
-        )
-      );
-
+    # Packages of a flake input for the current system, e.g.
+    # `(flakePkgs args "prism-launcher").default`
     flakePkgs =
       { inputs, pkgs, ... }: flake: inputs.${flake}.packages.${pkgs.stdenv.hostPlatform.system};
 
-    # Get list of all nix files and directories in path for easy importing
+    # Every .nix file below `dir` (recursively), except default.nix files.
+    # Used so that dropping a file into modules/ is enough to import it.
     scanPaths =
-      path:
-      map (f: (path + "/${f}")) (
-        attrNames (
-          filterAttrs (
-            path: _type: (_type == "directory") || ((path != "default.nix") && (hasSuffix ".nix" path))
-          ) (builtins.readDir path)
-        )
-      );
-
-    asserts =
-      asserts:
-      concatMap (a: a) (
-        imap0 (
-          i: elem:
-          if (mod i 2) == 0 then
-            singleton {
-              assertion = elem;
-              message = (elemAt asserts (i + 1));
-            }
-          else
-            [ ]
-        ) asserts
+      dir:
+      filter (path: hasSuffix ".nix" path && baseNameOf path != "default.nix") (
+        lib.filesystem.listFilesRecursive dir
       );
 
     # Adding multiple EXIT traps in a bash script is a pain because they
@@ -113,6 +61,5 @@ in
           fi
         }
       '';
-
   };
 }

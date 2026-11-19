@@ -2,47 +2,27 @@
   description = "Flake of C410l";
 
   outputs =
-    { self, ... }@inputs:
-
+    { self, nixpkgs, ... }:
     let
-      # --- SYSTEM SETTINGS --- #
-      systemSettings = {
-        system = "x86_64-linux";
-        hostname = "VEGA";
-        timezone = "America/Sao_Paulo";
-        locale = "pt_BR.UTF-8";
+      lib = nixpkgs.lib.extend (final: _: import ./lib final);
+      inherit (lib.C410l) mkHost;
+
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
       };
-
-      # --- USER SETTINGS --- #
-      userSettings = {
-        username = "caiol";
-        name = "Caio Luiz";
-        email = "caioluiz86@gmail.com";
-        theme = "catppuccin-mocha";
-        browser = "brave";
-        term = "kitty";
-        editor = "nvim";
-      };
-
-      # configure pkgs
-      nixpkgs = inputs.nixpkgs;
-
-      extraSettings = {
-        inherit systemSettings userSettings;
-      };
-
-      lib = nixpkgs.lib.extend (final: _: import ./lib final "C410l" extraSettings);
-      inherit (lib.${lib.ns}.flakeUtils self) mkHost forEachSystem;
     in
     {
-      templates = import ./templates;
-      packages = forEachSystem (pkgs: import ./pkgs self lib pkgs);
-
       nixosConfigurations = {
-
-        vega = mkHost "vega" "caiol" "x86_64-linux";
-
+        vega = mkHost self "vega" system;
       };
+
+      # Own packages (pkgs/) and the installer ISO: `nix build .#installer-x86_64`
+      packages.${system} = import ./pkgs self lib pkgs;
+
+      # `nix flake init -t github:caio86/nixos#<name>`
+      templates = import ./templates;
     };
 
   inputs = {

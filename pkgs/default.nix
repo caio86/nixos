@@ -12,5 +12,6 @@ in
   tmux-sessionizer = callPackage ./tmux-sessionizer.nix { };
   tmux-windowizer = callPackage ./tmux-windowizer.nix { };
   es-de = callPackage ./es-de.nix { };
+  catppuccin-grub = callPackage ./catppuccin-grub.nix { };
 }
 // import ./installers.nix lib self

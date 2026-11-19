@@ -1,78 +1,64 @@
+# The single source of truth for who uses this machine. Other modules read
+# `config.C410l.user.*` (and home-manager modules read `osConfig.C410l.user.*`).
 {
   lib,
   pkgs,
   config,
-  username,
-  adminUsername,
-  userSettings,
   ...
 }:
 let
-  inherit (lib)
-    ns
-    mkOption
-    types
-    optional
-    mkAliasOptionModule
-    ;
-  inherit (config.${ns}.core) privilegedUser;
+  inherit (lib) mkOption types optional;
+  cfg = config.C410l.user;
 in
 {
-  imports = [
-    (mkAliasOptionModule [ "userPackages" ] [
-      "users"
-      "users"
-      username
-      "packages"
-    ])
-
-    (mkAliasOptionModule [ "adminPackages" ] [
-      "users"
-      "users"
-      adminUsername
-      "packages"
-    ])
-  ];
-
-  options.${ns}.core = {
-    username = mkOption {
+  options.C410l.user = {
+    name = mkOption {
       type = types.str;
-      readOnly = true;
-      default = username;
-      description = "The name of the primary user of the system";
-    };
-
-    adminUsername = mkOption {
-      type = types.str;
-      readOnly = true;
       default = "caiol";
-      description = "The username of the admin user that exists on all hosts";
+      description = "Login name of the primary user";
     };
 
-    privilegedUser = mkOption {
+    fullName = mkOption {
+      type = types.str;
+      default = "Caio Luiz";
+    };
+
+    email = mkOption {
+      type = types.str;
+      default = "caioluiz86@gmail.com";
+    };
+
+    gitName = mkOption {
+      type = types.str;
+      default = "caio86";
+      description = "Name used for git commits (GitHub handle)";
+    };
+
+    isAdmin = mkOption {
       type = types.bool;
       default = true;
-      description = "If the primary user is in wheel group";
+      description = "Whether the primary user is in the wheel group";
     };
   };
 
   config = {
-    sops.secrets."${username}_password".neededForUsers = true;
+    # Password hash comes from the nix-secrets repo (see sops.nix)
+    sops.secrets."${cfg.name}_password".neededForUsers = true;
 
     users = {
       mutableUsers = true;
       defaultUserShell = pkgs.zsh;
-      users.${username} = {
+      users.${cfg.name} = {
         isNormalUser = true;
         uid = 1000;
-        description = userSettings.name;
-        hashedPasswordFile = config.sops.secrets."${username}_password".path;
+        description = cfg.fullName;
+        hashedPasswordFile = config.sops.secrets."${cfg.name}_password".path;
         extraGroups = [
           "networkmanager"
           "input"
           "dialout"
         ]
-        ++ optional privilegedUser "wheel";
+        ++ optional cfg.isAdmin "wheel";
       };
     };
   };

@@ -12,9 +12,8 @@ let
         modules = [
           {
             nixpkgs.hostPlatform = system;
-            nixpkgs.buildPlatform = "x86_64-linux";
           }
-          ../profiles/installer
+          ../hosts/installer
         ];
       }).config.system.build.isoImage;
   };

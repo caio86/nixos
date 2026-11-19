@@ -1,66 +1,26 @@
+# Home-manager runs as part of the NixOS build (no separate `home-manager
+# switch`). The user's config is every module in modules/home plus the host's
+# hosts/<hostname>/home.nix.
 {
   lib,
+  self,
+  config,
   inputs,
   hostname,
-  username,
-  adminUsername,
   ...
-}@args:
-
-let
-  inherit (lib) ns mkAliasOptionModule;
-in
+}:
 {
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    (mkAliasOptionModule
-      [
-        ns
-        "hm"
-      ]
-      [
-        "home-manager"
-        "users"
-        username
-      ]
-    )
-    (mkAliasOptionModule
-      [
-        ns
-        "hmNs"
-      ]
-      [
-        "home-manager"
-        "users"
-        username
-        ns
-      ]
-    )
-    (mkAliasOptionModule
-      [
-        ns
-        "hmAdmin"
-      ]
-      [
-        "home-manager"
-        "users"
-        adminUsername
-      ]
-    )
-  ];
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   home-manager = {
-
     useGlobalPkgs = true;
     useUserPackages = true;
 
-    extraSpecialArgs = {
-      inherit inputs hostname;
-      inherit (args) self userSettings;
-    };
+    extraSpecialArgs = { inherit inputs self hostname; };
 
-    users = {
-      ${username} = ../../../profiles/${hostname}/home.nix;
-    };
+    users.${config.C410l.user.name}.imports = [
+      ../../home
+      ../../../hosts/${hostname}/home.nix
+    ];
   };
 }
