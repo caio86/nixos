@@ -13,7 +13,7 @@ let
     name = "install-host";
 
     runtimeInputs = with pkgs; [
-      self.inputs.nix-secrets.packages.${pkgs.system}.bootstrap-kit
+      self.inputs.nix-secrets.packages.${pkgs.stdenv.hostPlatform.system}.bootstrap-kit
       disko
       gitMinimal
     ];
@@ -195,7 +195,7 @@ in
 
     environment.systemPackages =
       (with pkgs; [
-        self.inputs.nix-secrets.packages.${pkgs.system}.bootstrap-kit
+        self.inputs.nix-secrets.packages.${pkgs.stdenv.hostPlatform.system}.bootstrap-kit
         gitMinimal
         disko
         zellij
@@ -205,12 +205,16 @@ in
       ++ [ installScript ];
 
     nix.settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
       warn-dirty = false;
     };
 
     zramSwap.enable = true;
+    boot.zfs.forceImportRoot = false;
 
     services.openssh = {
       enable = true;

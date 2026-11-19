@@ -79,18 +79,6 @@ in
         )
       );
 
-    scanPathsExcept =
-      path: except:
-      map (f: (path + "/${f}")) (
-        attrNames (
-          filterAttrs (
-            path: _type:
-            (_type == "directory")
-            || ((!elem path except) && (path != "default.nix") && (hasSuffix ".nix" path))
-          ) (builtins.readDir path)
-        )
-      );
-
     asserts =
       asserts:
       concatMap (a: a) (

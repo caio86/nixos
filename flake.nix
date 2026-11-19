@@ -36,14 +36,11 @@
     in
     {
       templates = import ./templates;
-      overlays = import ./overlays;
       packages = forEachSystem (pkgs: import ./pkgs self lib pkgs);
 
       nixosConfigurations = {
 
         vega = mkHost "vega" "caiol" "x86_64-linux";
-
-        lua = mkHost "lua" "caiol" "x86_64-linux";
 
       };
     };
@@ -54,8 +51,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-wsl.url = "github:nix-community/nixos-wsl";
-
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -63,23 +58,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-
-    hypridle.url = "github:hyprwm/hypridle";
-    hypridle.inputs.nixpkgs.follows = "nixpkgs";
-    hypridle.inputs.hyprutils.follows = "hyprland/hyprutils";
-    hypridle.inputs.hyprland-protocols.follows = "hyprland/hyprland-protocols";
-    hypridle.inputs.hyprlang.follows = "hyprland/hyprlang";
-    hypridle.inputs.hyprwayland-scanner.follows = "hyprland/hyprwayland-scanner";
-
-    hyprlock.url = "github:hyprwm/hyprlock";
-    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
-    hyprlock.inputs.hyprutils.follows = "hyprland/hyprutils";
-    hyprlock.inputs.hyprgraphics.follows = "hyprland/hyprgraphics";
-    hyprlock.inputs.hyprlang.follows = "hyprland/hyprlang";
-    hyprlock.inputs.hyprwayland-scanner.follows = "hyprland/hyprwayland-scanner";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
