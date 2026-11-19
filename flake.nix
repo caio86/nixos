@@ -91,6 +91,8 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    prism-launcher.url = "github:Diegiwg/PrismLauncher-Cracked";
+
     neovim-config.url = "github:caio86/nvim";
     neovim-config.flake = false;
 

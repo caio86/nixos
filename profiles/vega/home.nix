@@ -46,6 +46,7 @@ in
     feh
     mpv
     cava
+    (flakePkgs args "prism-launcher").default
 
     obsidian
 
