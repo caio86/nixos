@@ -6,8 +6,7 @@
 }@args:
 {
   C410l = {
-    apps.brave.enable = true;
-    apps.kitty.enable = true;
+    apps.chrome.enable = true;
     dev.k8s.enable = true;
   };
 
