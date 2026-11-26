@@ -77,6 +77,12 @@
     capSysAdmin = true;
   };
 
+  services.xrdp = {
+    enable = true;
+    defaultWindowManager = "startplasma-x11";
+    openFirewall = true;
+  };
+
   services.flatpak.enable = true;
   services.fstrim.enable = true;
   virtualisation.vmware.host.enable = true;
