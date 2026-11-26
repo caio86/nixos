@@ -1,6 +1,6 @@
 # Desktop PC: Plasma, gaming, virtualisation. Dual-boots Windows from
 # another disk (picked up by os-prober).
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -80,6 +80,25 @@
   services.flatpak.enable = true;
   services.fstrim.enable = true;
   virtualisation.vmware.host.enable = true;
+
+  # WORKAROUND (nixpkgs, 2026-11): kernel modules must now be signed and ship
+  # a <module>.ko.cer, but the vmware-modules package installs vmmon/vmnet
+  # without them, which breaks the kernel modules build. Re-install them
+  # through kbuild's modules_install, which signs them. Remove once nixpkgs
+  # fixes the vmware package.
+  boot.kernelPackages = pkgs.linuxPackages.extend (
+    final: prev: {
+      vmware = prev.vmware.overrideAttrs (old: {
+        postInstall = (old.postInstall or "") + ''
+          for module in vmmon vmnet; do
+            make -C ${final.kernel.dev}/lib/modules/${final.kernel.modDirVersion}/build \
+              M="$PWD/$module-only" INSTALL_MOD_PATH="$out" INSTALL_MOD_DIR=misc \
+              ${lib.escapeShellArgs final.kernelModuleMakeFlags} modules_install
+          done
+        '';
+      });
+    }
+  );
   programs.mininet.enable = true;
 
   environment.systemPackages = [
